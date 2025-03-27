@@ -56,68 +56,74 @@ export const HeroSection = () => {
 
   return (
     <Container maxWidth={"xl"}>
-    <Box sx={{ position: "relative", width: "100%", py: 4 }}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mb: 10,
-        }}
-      >
-        <Typography
-          variant="h4"
-          fontWeight="bold"
-          color="primary"
-          fontFamily="Montserrat, Helvetica"
-        >
-          Галерея
-        </Typography>
-        <Link
-          href="#"
-          underline="always"
+      <Box sx={{ position: "relative", width: "100%", py: 4 }}>
+        <Box
           sx={{
-            fontSize: "0.75rem",
-            fontWeight: 500,
-            fontFamily: "Montserrat, Helvetica",
-            color: "text.primary",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 10,
           }}
         >
-          Смотреть все
-        </Link>
-      </Box>
-
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: {
-            xs: "1fr",
-            sm: "repeat(2, 1fr)",
-            md: "repeat(5, 1fr)",
-          },
-          gridTemplateRows: { md: "repeat(4, auto)" },
-          gap: 3,
-          width: "100%",
-        }}
-      >
-        {galleryImages.map((image) => (
-          <Box
-            key={image.id}
-            component="img"
-            src={image.src}
-            alt={image.alt}
+          <Typography
+            variant="h4"
+            fontWeight="bold"
+            color="primary"
+            fontFamily="Montserrat, Helvetica"
+          >
+            Галерея
+          </Typography>
+          <Link
+            href="#"
+            underline="always"
             sx={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              gridArea: image.gridArea,
-              display: "block",
-              borderRadius: '10px'
+              fontSize: "0.75rem",
+              fontWeight: 500,
+              fontFamily: "Montserrat, Helvetica",
+              color: "text.primary",
             }}
-          />
-        ))}
+          >
+            Смотреть все
+          </Link>
+        </Box>
+
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(5, 1fr)",
+            },
+            gridTemplateRows: { md: "repeat(4, auto)" },
+            gap: 3,
+            width: "100%",
+          }}
+        >
+          {galleryImages.map((image) => (
+            <Box
+              key={image.id}
+              component="img"
+              src={image.src}
+              alt={image.alt}
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                gridArea: image.gridArea,
+                display: "block",
+                borderRadius: '10px',
+                transition: 'transform 0.5s ease-in-out',
+                '&:hover': {
+                  transform: 'scale(1.07)',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                  zIndex: 1,
+                }
+              }}
+            />
+          ))}
+        </Box>
       </Box>
-    </Box>
     </Container>
   );
 };

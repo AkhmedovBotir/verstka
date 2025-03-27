@@ -14,7 +14,7 @@ export const NewsletterSection = () => {
       sx={{
         position: "relative",
         width: "100%",
-        height: "640px",
+        height: "700px",
         backgroundImage:
           "url(https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-27.png)",
         backgroundSize: "100% 100%",
@@ -23,16 +23,17 @@ export const NewsletterSection = () => {
       <Box
         sx={{
           position: "relative",
-          width: "560px",
-          height: "640px",
+          width: "600px",
+          height: "100%",
           marginLeft: "auto",
+          marginRight: "200px",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           backdropFilter: "blur(10px) brightness(100%)",
         }}
       >
-        <Box sx={{ padding: "50px 105px" }}>
+        <Box sx={{ padding: "100px" }}>
           <Typography
-            variant="h4"
+            variant="h5"
             fontFamily="Montserrat, Helvetica"
             fontWeight="bold"
             color="white"

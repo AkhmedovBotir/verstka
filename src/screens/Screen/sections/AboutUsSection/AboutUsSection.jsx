@@ -1,15 +1,34 @@
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
-import React from "react";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import { 
+  Box, 
+  Button, 
+  IconButton, 
+  Stack, 
+  Typography,
+  Drawer,
+  useMediaQuery,
+  ThemeProvider,
+  createTheme
+} from "@mui/material";
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import bgVideo from "../../../../assets/video2.mp4";
 
 export const AboutUsSection = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const autoplayRef = useRef(null);
+  const isTablet = useMediaQuery('(max-width:1024px)');
+
   // Navigation items
   const navItems = [
-    { text: "Главная", isActive: true },
-    { text: "Экскурсии", isActive: false },
-    { text: "Личный кабинет", isActive: false },
+    { text: "Главная", isActive: true, link: "/" },
+    { text: "Экскурсии", isActive: false, link: "/excursion" },
+    { text: "Личный кабинет", isActive: false, link: "/" },
   ];
 
   // Social media icons
@@ -23,17 +42,137 @@ export const AboutUsSection = () => {
       src: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/group-4.png",
     },
     {
-      component: <FacebookIcon sx={{ width: 30, height: 30, color: '#fff' }}/>,
+      component: <FacebookIcon sx={{ width: 30, height: 30, color: '#fff' }} />,
       alt: "Facebook",
     },
   ];
 
+  // Bottom images array
+  const bottomImages = [
+    {
+      id: 1,
+      type: "image",
+      src: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-12.png",
+      alt: "Travel image 1"
+    },
+    {
+      id: 2,
+      type: "image",
+      src: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+      alt: "Travel image 2"
+    },
+    {
+      id: 3,
+      type: "video",
+      src: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-11.png",
+      alt: "Video thumbnail"
+    },
+    {
+      id: 4,
+      type: "image",
+      src: "https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+      alt: "Travel image 3"
+    },
+    {
+      id: 5,
+      type: "image",
+      src: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+      alt: "Travel image 4"
+    }
+  ];
+
+  const handleImageClick = (index) => {
+    setCurrentImageIndex(index);
+    resetAutoplay();
+  };
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  // Autoplay functionality
+  const startAutoplay = () => {
+    autoplayRef.current = setInterval(() => {
+      setCurrentImageIndex(prevIndex => 
+        prevIndex === bottomImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000);
+  };
+
+  const resetAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+    }
+    startAutoplay();
+  };
+
+  useEffect(() => {
+    startAutoplay();
+    return () => {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+      }
+    };
+  }, []);
+
+  const drawer = (
+    <Box
+      sx={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgb(56, 77, 112)',
+        padding: '20px'
+      }}
+    >
+      <IconButton
+        onClick={handleDrawerToggle}
+        sx={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          color: '#fff'
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+      <Stack spacing={4}>
+        {navItems.map((item, index) => (
+          <Typography
+            key={index}
+            variant="h5"
+            component={Link}
+            to={item.link}
+            onClick={handleDrawerToggle}
+            sx={{
+              fontFamily: "Montserrat, Helvetica",
+              fontWeight: 500,
+              color: item.isActive ? "#ffc700" : "white",
+              cursor: "pointer",
+              textDecoration: 'none',
+              '&:hover': {
+                color: '#ffc700'
+              }
+            }}
+          >
+            {item.text}
+          </Typography>
+        ))}
+      </Stack>
+    </Box>
+  );
+
   return (
-    <Box sx={{ position: "relative", height: "902px", width: "100%" }}>
+    <Box sx={{ position: "relative", height: "902px", width: "100%", overflow: "hidden" }}>
+      {/* Video Background */}
       <Box
-        component="img"
-        src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-1.png"
-        alt="Background"
+        component="video"
+        autoPlay
+        muted
+        loop
+        src={bgVideo}
         sx={{
           width: "100%",
           height: "790px",
@@ -44,46 +183,86 @@ export const AboutUsSection = () => {
         }}
       />
 
-      {/* Logo */}
-      <Box
-        component="img"
-        src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/----.png"
-        alt="Logo"
-        sx={{
-          width: "40px",
-          height: "57px",
-          position: "absolute",
-          top: "26px",
-          left: "160px",
-        }}
-      />
+      {/* Logo and Navigation */}
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: "space-between", 
+        alignItems: 'center', 
+        position: 'absolute', 
+        top: '26px', 
+        left: '160px', 
+        right: '160px',
+        '@media (max-width: 1024px)': {
+          left: '20px',
+          right: '20px'
+        }
+      }}>
+        <Box
+          component="img"
+          src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/----.png"
+          alt="Logo"
+          sx={{
+            width: "40px",
+            height: "57px",
+            marginRight: '40px'
+          }}
+        />
+        
+        {!isTablet ? (
+          <Stack direction="row" spacing={4}>
+            {navItems.map((item, index) => (
+              <Typography
+                key={index}
+                variant="subtitle2"
+                component={Link}
+                to={item.link}
+                sx={{
+                  fontFamily: "Montserrat, Helvetica",
+                  fontWeight: 500,
+                  color: item.isActive ? "#ffc700" : "white",
+                  cursor: "pointer",
+                  textDecoration: 'none',
+                  '&:hover': {
+                    color: '#ffc700'
+                  }
+                }}
+              >
+                {item.text}
+              </Typography>
+            ))}
+          </Stack>
+        ) : (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ color: '#fff' }}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
+      </Box>
 
-      {/* Navigation */}
-      <Stack
-        direction="row"
-        spacing={4}
+      {/* Mobile Drawer */}
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
         sx={{
-          position: "absolute",
-          top: "46px",
-          right: "154px",
+          '& .MuiDrawer-paper': {
+            width: '100%',
+            backgroundColor: 'rgb(56, 77, 112)',
+          },
         }}
       >
-        {navItems.map((item, index) => (
-          <Typography
-            key={index}
-            variant="subtitle2"
-            sx={{
-              fontFamily: "Montserrat, Helvetica",
-              fontWeight: 500,
-              color: item.isActive ? "#ffc700" : "white",
-              cursor: "pointer",
-            }}
-          >
-            {item.text}
-          </Typography>
-        ))}
-      </Stack>
+        {drawer}
+      </Drawer>
 
+      {/* Rest of the components remain the same */}
       {/* Main Heading */}
       <Box
         sx={{
@@ -92,6 +271,10 @@ export const AboutUsSection = () => {
           left: "160px",
           width: "723px",
           height: "192px",
+          '@media (max-width: 1024px)': {
+            left: '20px',
+            width: 'calc(100% - 40px)'
+          }
         }}
       >
         <Typography
@@ -104,6 +287,9 @@ export const AboutUsSection = () => {
             position: "absolute",
             top: 0,
             left: "2px",
+            '@media (max-width: 768px)': {
+              fontSize: '48px'
+            }
           }}
         >
           ПУТЕШЕСТВУЙ
@@ -121,6 +307,9 @@ export const AboutUsSection = () => {
             position: "absolute",
             top: "75px",
             left: 0,
+            '@media (max-width: 768px)': {
+              fontSize: '54px'
+            }
           }}
         >
           PERO TRAVEL
@@ -136,8 +325,15 @@ export const AboutUsSection = () => {
             position: "absolute",
             top: "48px",
             left: "500px",
+            '@media (max-width: 1024px)': {
+              left: '300px'
+            },
+            '@media (max-width: 768px)': {
+              fontSize: '48px',
+              left: '200px'
+            }
           }}
-          style={{fontFamily: "mr_KindlyJasmineG"}}
+          style={{ fontFamily: "mr_KindlyJasmineG" }}
         >
           вместе с
         </Typography>
@@ -162,7 +358,12 @@ export const AboutUsSection = () => {
           fontFamily: "Montserrat, Helvetica",
           fontWeight: 700,
           fontSize: "14px",
+          '@media (max-width: 1024px)': {
+            left: '20px'
+          }
         }}
+        component={Link}
+        to="/excursion"
       >
         К экскурсиям
       </Button>
@@ -174,6 +375,9 @@ export const AboutUsSection = () => {
           position: "absolute",
           top: "333px",
           right: "163px",
+          '@media (max-width: 1024px)': {
+            right: '20px'
+          }
         }}
       >
         {socialIcons.map((icon, index) => (
@@ -197,64 +401,98 @@ export const AboutUsSection = () => {
         ))}
       </Stack>
 
-      {/* Bottom Images */}
+      {/* Bottom Images Carousel */}
       <Box
         sx={{
           position: "absolute",
           bottom: 0,
-          right: "0px",
+          left: 0,
+          right: 0,
           height: "227px",
           display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
         }}
       >
         <Box
           sx={{
-            width: "360px",
-            height: "227px",
-            backgroundImage:
-              "url(https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-11.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "50% 50%",
+            width: "100%",
+            maxWidth: "1200px",
             position: "relative",
-            borderRadius: "10px",
-
+            padding: "0 50px",
           }}
         >
           <Box
             sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "66px",
-              height: "66px",
-              borderRadius: "33px",
-              border: "1px solid #ffc700",
-              boxShadow: "0px 0px 4px #ffc600, 0px 0px 6px rgba(0, 0, 0, 0.25)",
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              transition: "transform 0.5s ease",
+              transform: `translateX(${-currentImageIndex * 250 + 250}px)`,
             }}
           >
-            <PlayArrowIcon
-              sx={{ width: "44px", height: "44px", color: "#ffc700" }}
-            />
+            {bottomImages.map((image, index) => {
+              const isCenter = index === currentImageIndex;
+
+              return (
+                <Box
+                  key={image.id}
+                  onClick={() => handleImageClick(index)}
+                  sx={{
+                    width: isCenter ? "360px" : "235px",
+                    height: "227px",
+                    backgroundImage: `url(${image.src})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    position: "relative",
+                    borderRadius: "10px",
+                    margin: "0 10px",
+                    transition: "all 0.3s ease",
+                    transform: isCenter ? "scale(1.05)" : "scale(0.9)",
+                    opacity: isCenter ? 1 : 0.8,
+                    zIndex: isCenter ? 2 : 1,
+                    flexShrink: 0,
+                    cursor: "pointer",
+                    "&:hover": {
+                      transform: isCenter ? "scale(1.08)" : "scale(0.95)",
+                    },
+                  }}
+                  aria-hidden={!isCenter}
+                  tabIndex={isCenter ? "0" : "-1"}
+                  role="option"
+                  aria-describedby={`slide-${index}`}
+                >
+                  {image.type === "video" && isCenter && (
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "66px",
+                        height: "66px",
+                        borderRadius: "33px",
+                        border: "1px solid #ffc700",
+                        boxShadow: "0px 0px 4px #ffc600, 0px 0px 6px rgba(0, 0, 0, 0.25)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        zIndex: 3,
+                      }}
+                    >
+                      <PlayArrowIcon
+                        sx={{ width: "44px", height: "44px", color: "#ffc700" }}
+                      />
+                    </Box>
+                  )}
+                </Box>
+              );
+            })}
           </Box>
         </Box>
-
-        <Box
-          component="img"
-          src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-12.png"
-          alt="Travel image"
-          sx={{
-            borderRadius: "10px",
-            marginLeft: "15px",
-            width: "235px",
-            height: "227px",
-            objectFit: "cover",
-          }}
-        />
       </Box>
     </Box>
   );
 };
+
+export default AboutUsSection;

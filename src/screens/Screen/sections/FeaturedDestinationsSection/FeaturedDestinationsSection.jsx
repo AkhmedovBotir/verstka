@@ -48,7 +48,7 @@ export const FeaturedDestinationsSection = () => {
   };
 
   return (
-    <Container sx={{ py: 10 }}>
+    <Container sx={{ py: 10 }} maxWidth="xl">
       <Box
         sx={{
           display: "flex",
