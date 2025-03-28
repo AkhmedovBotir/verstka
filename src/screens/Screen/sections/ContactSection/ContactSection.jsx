@@ -3,10 +3,14 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
 import TelegramIcon from "@mui/icons-material/Telegram";
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 
 export const ContactSection = () => {
+  const theme = useTheme();
+  const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+
   // Navigation links data
   const navLinks = [
     { text: "Главная", href: "#" },
@@ -38,22 +42,30 @@ export const ContactSection = () => {
   ];
 
   return (
-    <Box sx={{ bgcolor: "#F6F6F6", py: 4 }}>
+    <Box sx={{ bgcolor: "#F6F6F6", py: { xs: 3, sm: 4 } }}>
       <Container maxWidth="lg">
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={{ xs: 3, sm: 2 }} alignItems={isSmUp ? "center" : "flex-start"}>
           {/* Logo */}
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={3} sx={{ 
+            display: "flex", 
+            justifyContent: { xs: "center", sm: "flex-start" },
+            order: { xs: 1, sm: 1 }
+          }}>
             <Box
               component="img"
               src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/logo-color-1.png"
               alt="Logo color"
-              sx={{ height: 114, width: 80, objectFit: "cover" }}
+              sx={{ 
+                height: { xs: 90, sm: 114 }, 
+                width: { xs: 60, sm: 80 }, 
+                objectFit: "cover" 
+              }}
             />
           </Grid>
 
           {/* Navigation Links */}
-          <Grid item xs={12} sm={3}>
-            <Stack spacing={2}>
+          <Grid item xs={12} sm={3} sx={{ order: { xs: 3, sm: 2 } }}>
+            <Stack spacing={{ xs: 1, sm: 2 }}>
               {navLinks.map((link, index) => (
                 <Typography
                   key={index}
@@ -61,7 +73,11 @@ export const ContactSection = () => {
                   fontFamily="Montserrat, Helvetica"
                   fontWeight={500}
                   color="#282828"
-                  sx={{ cursor: "pointer" }}
+                  sx={{ 
+                    cursor: "pointer",
+                    textAlign: { xs: "center", sm: "left" },
+                    fontSize: { xs: "0.875rem", sm: "inherit" }
+                  }}
                 >
                   {link.text}
                 </Typography>
@@ -70,14 +86,15 @@ export const ContactSection = () => {
           </Grid>
 
           {/* Contact Information */}
-          <Grid item xs={12} sm={3}>
-            <Stack spacing={2}>
+          <Grid item xs={12} sm={3} sx={{ order: { xs: 2, sm: 3 } }}>
+            <Stack spacing={{ xs: 1, sm: 2 }}>
               {contactInfo.map((item, index) => (
                 <Stack
                   key={index}
                   direction="row"
                   spacing={1}
                   alignItems="center"
+                  justifyContent={{ xs: "center", sm: "flex-start" }}
                 >
                   {item.icon}
                   <Typography
@@ -85,6 +102,7 @@ export const ContactSection = () => {
                     fontFamily="Montserrat, Helvetica"
                     fontWeight={500}
                     color="#282828"
+                    sx={{ fontSize: { xs: "0.875rem", sm: "inherit" } }}
                   >
                     {item.text}
                   </Typography>
@@ -94,8 +112,8 @@ export const ContactSection = () => {
           </Grid>
 
           {/* Email and Social Media */}
-          <Grid item xs={12} sm={3}>
-            <Stack spacing={2}>
+          <Grid item xs={12} sm={3} sx={{ order: { xs: 4, sm: 4 } }}>
+            <Stack spacing={{ xs: 1, sm: 2 }} alignItems={{ xs: "center", sm: "flex-start" }}>
               <Stack direction="row" spacing={1} alignItems="center">
                 <EmailIcon fontSize="small" />
                 <Typography
@@ -103,12 +121,20 @@ export const ContactSection = () => {
                   fontFamily="Montserrat, Helvetica"
                   fontWeight={500}
                   color="#282828"
+                  sx={{ fontSize: { xs: "0.875rem", sm: "inherit" } }}
                 >
                   office@perotravel.ru
                 </Typography>
               </Stack>
 
-              <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+              <Stack 
+                direction="row" 
+                spacing={2} 
+                sx={{ 
+                  mt: { xs: 1, sm: 2 },
+                  justifyContent: { xs: "center", sm: "flex-start" }
+                }}
+              >
                 {socialIcons.map((icon, index) => (
                   <Box key={index} sx={{ cursor: "pointer" }}>
                     {icon}

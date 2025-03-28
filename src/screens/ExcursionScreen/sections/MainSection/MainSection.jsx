@@ -7,6 +7,7 @@ import bgVideo from "../../../../assets/video2.mp4"; // Adjust the path to your 
 export const MainSection = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const isTablet = useMediaQuery('(max-width:1024px)');
+  const isMobile = useMediaQuery('(max-width:600px)');
 
   // Navigation items data
   const navItems = [
@@ -46,7 +47,7 @@ export const MainSection = () => {
         {navItems.map((item, index) => (
           <Typography
             key={index}
-            variant="h5"
+            variant={isMobile ? "h6" : "h5"}
             component="a"
             href={item.link}
             onClick={handleDrawerToggle}
@@ -68,17 +69,18 @@ export const MainSection = () => {
   );
 
   return (
-    <Box width="100%" position="relative" sx={{ height: "290px" }}>
+    <Box width="100%" position="relative" sx={{ height: { xs: "200px", sm: "250px", md: "290px" } }}>
       {/* Video Background */}
       <Box
         component="video"
         autoPlay
         muted
         loop
+        playsInline
         src={bgVideo}
         sx={{
           width: "100%",
-          height: "290px",
+          height: { xs: "200px", sm: "250px", md: "290px" },
           objectFit: "cover",
           position: "absolute",
           top: 0,
@@ -94,13 +96,11 @@ export const MainSection = () => {
         alt="Logo"
         sx={{
           position: "absolute",
-          width: 40,
-          height: 57,
-          top: 26,
-          left: 160,
-          '@media (max-width: 1024px)': {
-            left: '20px'
-          }
+          width: { xs: 30, sm: 40 },
+          height: { xs: 43, sm: 57 },
+          top: { xs: 16, sm: 26 },
+          left: { xs: 20, sm: 40, md: 160 },
+          objectFit: "contain"
         }}
       />
 
@@ -110,8 +110,8 @@ export const MainSection = () => {
           direction="row"
           spacing={2}
           position="absolute"
-          top={46}
-          right={154}
+          top={{ xs: 20, md: 46 }}
+          right={{ xs: 20, sm: 40, md: 154 }}
         >
           {navItems.map((item, index) => (
             <Typography
@@ -127,6 +127,9 @@ export const MainSection = () => {
                 lineHeight: "normal",
                 textDecoration: "none",
                 cursor: "pointer",
+                '&:hover': {
+                  color: "#FFFF00"
+                }
               }}
             >
               {item.label}
@@ -141,9 +144,10 @@ export const MainSection = () => {
           onClick={handleDrawerToggle}
           sx={{
             position: "absolute",
-            top: 26,
+            top: { xs: 16, sm: 26 },
             right: 20,
-            color: '#fff'
+            color: '#fff',
+            zIndex: 1
           }}
         >
           <MenuIcon />
@@ -171,14 +175,12 @@ export const MainSection = () => {
       {/* Title */}
       <Box
         position="absolute"
-        top={142}
-        left={160}
+        top={{ xs: "50%", sm: 142 }}
+        left={{ xs: 20, md: 160 }}
+        right={{ xs: 20, md: "auto" }}
         sx={{
-          '@media (max-width: 1024px)': {
-            left: '20px',
-            right: '20px',
-            textAlign: 'center'
-          }
+          transform: { xs: "translateY(-50%)", sm: "none" },
+          textAlign: { xs: "center", md: "left" }
         }}
       >
         <Typography
@@ -186,13 +188,11 @@ export const MainSection = () => {
           sx={{
             fontFamily: "'Montserrat', Helvetica",
             fontWeight: 700,
-            fontSize: "4.5rem",
+            fontSize: { xs: "2rem", sm: "3rem", md: "4.5rem" },
             color: "white",
             letterSpacing: 0,
             lineHeight: "normal",
-            '@media (max-width: 768px)': {
-              fontSize: '3rem'
-            }
+            textShadow: "1px 1px 3px rgba(0,0,0,0.5)"
           }}
         >
           НАШИ ЭКСКУРСИИ

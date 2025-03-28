@@ -15,6 +15,8 @@ import {
   MenuItem,
   Popover,
   IconButton,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -22,6 +24,10 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import React, { useState } from "react";
 
 export const TourFilterSection = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  
   const [tabValue, setTabValue] = useState(0);
   const [locationAnchorEl, setLocationAnchorEl] = useState(null);
   const [peopleAnchorEl, setPeopleAnchorEl] = useState(null);
@@ -112,17 +118,24 @@ export const TourFilterSection = () => {
           width: "100%",
           mx: "auto",
           borderRadius: "10px",
-          p: 5,
-          mt: 4,
+          p: { xs: 2, sm: 3, md: 5 },
+          mt: { xs: 2, sm: 4 },
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: { xs: 2, sm: 4 } }}>
           {/* Tour type tabs */}
-          <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <Box sx={{ width: "100%", overflowX: isMobile ? 'auto' : 'visible' }}>
             <Tabs
               value={tabValue}
               onChange={handleTabChange}
+              variant={isMobile ? "scrollable" : "standard"}
+              scrollButtons={isMobile ? "auto" : false}
               sx={{
+                "& .MuiTabs-flexContainer": {
+                  flexDirection: isMobile ? "column" : "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                },
                 "& .MuiTabs-indicator": {
                   backgroundColor: "#1976d2",
                 },
@@ -131,12 +144,14 @@ export const TourFilterSection = () => {
               {tourTypes.map((type) => (
                 <Tab
                   key={type.value}
-                  label={type.label}
+                  label={isMobile ? type.label.split(' ')[0] : type.label}
                   sx={{
+                    minWidth: 'unset',
+                    px: { xs: 1, sm: 2 },
                     borderBottom: "3px solid #E0E0E0",
                     fontFamily: "Montserrat, Helvetica",
                     fontWeight: 500,
-                    fontSize: "14px",
+                    fontSize: { xs: "12px", sm: "14px" },
                     color: tabValue === type.value ? "#1976d2" : "#000000",
                   }}
                 />
@@ -148,25 +163,24 @@ export const TourFilterSection = () => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: { xs: "column", sm: "row" },
               gap: 2,
               justifyContent: "space-around",
               alignItems: "center",
             }}
           >
             {/* Location */}
-            <Box>
+            <Box sx={{ width: { xs: "100%", sm: 235 } }}>
               <TextField
+                fullWidth
                 variant="outlined"
                 value={selectedLocation}
                 onClick={handleLocationClick}
                 InputProps={{
                   readOnly: true,
+                  startAdornment: <LocationOn sx={{ color: "#0499DD", mr: 1 }} />,
                   endAdornment: (
-                    <>
-                      <LocationOn sx={{ color: "#0499DD" }} />
-                      <KeyboardArrowDown sx={{ color: "#0499DD" }} />
-                    </>
+                    <KeyboardArrowDown sx={{ color: "#0499DD" }} />
                   ),
                   sx: {
                     height: 50,
@@ -175,9 +189,9 @@ export const TourFilterSection = () => {
                     fontWeight: 500,
                     fontSize: "14px",
                     cursor: "pointer",
+                    pl: 1,
                   },
                 }}
-                sx={{ width: 235 }}
               />
               <Menu
                 anchorEl={locationAnchorEl}
@@ -196,19 +210,18 @@ export const TourFilterSection = () => {
             </Box>
 
             {/* Date */}
-            <Box>
+            <Box sx={{ width: { xs: "100%", sm: 235 } }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <TextField
+                  fullWidth
                   variant="outlined"
                   value={formatDate(selectedDate)}
                   onClick={handleDateClick}
                   InputProps={{
                     readOnly: true,
+                    startAdornment: <CalendarToday sx={{ color: "#0499DD", mr: 1 }} />,
                     endAdornment: (
-                      <>
-                        <CalendarToday sx={{ color: "#0499DD" }} />
-                        <KeyboardArrowDown sx={{ color: "#0499DD" }} />
-                      </>
+                      <KeyboardArrowDown sx={{ color: "#0499DD" }} />
                     ),
                     sx: {
                       height: 50,
@@ -217,9 +230,9 @@ export const TourFilterSection = () => {
                       fontWeight: 500,
                       fontSize: "14px",
                       cursor: "pointer",
+                      pl: 1,
                     },
                   }}
-                  sx={{ width: 235 }}
                 />
                 <Popover
                   open={Boolean(dateAnchorEl)}
@@ -242,18 +255,17 @@ export const TourFilterSection = () => {
             </Box>
 
             {/* People count */}
-            <Box>
+            <Box sx={{ width: { xs: "100%", sm: 235 } }}>
               <TextField
+                fullWidth
                 variant="outlined"
                 value={`${peopleCount} человек`}
                 onClick={handlePeopleClick}
                 InputProps={{
                   readOnly: true,
+                  startAdornment: <People sx={{ color: "#0499DD", mr: 1 }} />,
                   endAdornment: (
-                    <>
-                      <People sx={{ color: "#0499DD" }} />
-                      <KeyboardArrowDown sx={{ color: "#0499DD" }} />
-                    </>
+                    <KeyboardArrowDown sx={{ color: "#0499DD" }} />
                   ),
                   sx: {
                     height: 50,
@@ -262,9 +274,9 @@ export const TourFilterSection = () => {
                     fontWeight: 500,
                     fontSize: "14px",
                     cursor: "pointer",
+                    pl: 1,
                   },
                 }}
-                sx={{ width: 235 }}
               />
               <Menu
                 anchorEl={peopleAnchorEl}
@@ -284,16 +296,18 @@ export const TourFilterSection = () => {
 
             {/* Show button */}
             <Button
+              fullWidth={isMobile}
               sx={{
                 background: "linear-gradient(90deg, #0499DD 0%, #17C1BC 100%)",
                 color: "#FFFFFF",
-                width: 235,
+                width: { xs: "100%", sm: 235 },
                 height: 50,
                 borderRadius: "10px",
                 textTransform: "none",
                 fontFamily: "Montserrat, Helvetica",
                 fontWeight: 700,
                 fontSize: "14px",
+                mt: { xs: isMobile ? 0 : 0, sm: 0 },
               }}
             >
               Показать

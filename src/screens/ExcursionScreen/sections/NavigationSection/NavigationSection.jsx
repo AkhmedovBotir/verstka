@@ -12,17 +12,19 @@ import {
   Slider,
   Stack,
   ToggleButton,
-  ToggleButtonGroup,
   Typography,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
 import React, { useState } from "react";
 
 export const NavigationSection = () => {
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up(900)); // Custom 900px breakpoint
+  
   // State for filter values
   const [priceRange, setPriceRange] = useState([1600, 4000]);
   const [peopleCount, setPeopleCount] = useState("5");
-
-  // Location checkboxes state
   const [locations, setLocations] = useState({
     abkhazia: true,
     krasnayaPolyana: false,
@@ -30,26 +32,19 @@ export const NavigationSection = () => {
     adler1: false,
     adler2: false,
   });
-
-  // Collapsed sections state
   const [sectionsCollapsed, setSectionsCollapsed] = useState({
     duration: false,
     date: false,
   });
 
-  // Handle price range change
   const handlePriceChange = (event, newValue) => {
     setPriceRange(newValue);
   };
 
-  // Handle people count change
-  const handlePeopleCountChange = (event, newValue) => {
-    if (newValue !== null) {
-      setPeopleCount(newValue);
-    }
+  const handlePeopleCountChange = (value) => {
+    setPeopleCount(value);
   };
 
-  // Handle location checkbox change
   const handleLocationChange = (event) => {
     setLocations({
       ...locations,
@@ -57,7 +52,6 @@ export const NavigationSection = () => {
     });
   };
 
-  // Toggle section collapse
   const toggleSection = (section) => {
     setSectionsCollapsed({
       ...sectionsCollapsed,
@@ -65,7 +59,6 @@ export const NavigationSection = () => {
     });
   };
 
-  // Reset all filters
   const resetFilters = () => {
     setPriceRange([1600, 4000]);
     setPeopleCount("5");
@@ -78,7 +71,6 @@ export const NavigationSection = () => {
     });
   };
 
-  // People count options
   const peopleCountOptions = [
     { value: "1", label: "1 чел." },
     { value: "2", label: "2 чел." },
@@ -90,10 +82,9 @@ export const NavigationSection = () => {
     { value: "8", label: "8 чел." },
     { value: "9", label: "9 чел." },
     { value: "10", label: "10 чел." },
-    { value: "10+", label: "Больше 10 чел." },
+    { value: "10+", label: ">10 чел." },
   ];
 
-  // Location options
   const locationOptions = [
     { name: "abkhazia", label: "Абхазия" },
     { name: "krasnayaPolyana", label: "Красная поляна" },
@@ -103,41 +94,32 @@ export const NavigationSection = () => {
   ];
 
   return (
-    <Box sx={{ width: 295, height: "auto" }}>
+    <Box sx={{ 
+      width: isDesktop ? 295 : "100%",
+      minWidth: isDesktop ? 295 : "auto",
+      position: isDesktop ? "sticky" : "static",
+      top: isDesktop ? 20 : "auto"
+    }}>
       <Paper
         elevation={3}
         sx={{
           width: "100%",
-          height: "100%",
           borderRadius: "10px",
-          p: 3,
+          p: isDesktop ? 3 : 2,
           display: "flex",
           flexDirection: "column",
           gap: 2,
         }}
       >
         {/* Filters Header */}
-        <Typography
-          variant="subtitle1"
-          fontWeight="bold"
-          color="primary"
-          fontFamily="Montserrat, Helvetica"
-        >
+        <Typography variant="subtitle1" fontWeight="bold" color="primary" fontFamily="Montserrat, Helvetica">
           Фильтры
         </Typography>
 
         {/* Price Range Section */}
         <Box>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography
-              variant="subtitle2"
-              fontWeight="bold"
-              fontFamily="Montserrat, Helvetica"
-            >
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Typography variant="subtitle2" fontWeight="bold" fontFamily="Montserrat, Helvetica">
               Стоимость
             </Typography>
             <ExpandLess fontSize="small" />
@@ -147,30 +129,32 @@ export const NavigationSection = () => {
             <Button
               variant="outlined"
               size="small"
+              fullWidth
               sx={{
                 borderRadius: "40px",
-                flex: 1,
                 textTransform: "none",
                 fontFamily: "Montserrat, Helvetica",
                 fontWeight: 500,
                 fontSize: 12,
+                minWidth: 0
               }}
             >
-              {priceRange[0]}
+              {priceRange[0]} ₽
             </Button>
             <Button
               variant="outlined"
               size="small"
+              fullWidth
               sx={{
                 borderRadius: "40px",
-                flex: 1,
                 textTransform: "none",
                 fontFamily: "Montserrat, Helvetica",
                 fontWeight: 500,
                 fontSize: 12,
+                minWidth: 0
               }}
             >
-              {priceRange[1]}
+              {priceRange[1]} ₽
             </Button>
           </Stack>
 
@@ -217,203 +201,37 @@ export const NavigationSection = () => {
 
         {/* People Count Section */}
         <Box>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography
-              variant="subtitle2"
-              fontWeight="bold"
-              fontFamily="Montserrat, Helvetica"
-            >
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Typography variant="subtitle2" fontWeight="bold" fontFamily="Montserrat, Helvetica">
               Количество человек
             </Typography>
             <ExpandLess fontSize="small" />
           </Box>
 
-          <Box mt={2}>
-            <ToggleButtonGroup
-              value={peopleCount}
-              exclusive
-              onChange={handlePeopleCountChange}
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 1,
-                "& .MuiToggleButtonGroup-grouped": {
-                  border: "1px solid #ececec",
-                  borderRadius: "40px !important",
-                  m: 0,
-                },
-              }}
-            >
-              {peopleCountOptions.slice(0, 3).map((option) => (
-                <ToggleButton
-                  key={option.value}
-                  value={option.value}
-                  sx={{
-                    width: 73,
-                    height: 30,
-                    borderRadius: "40px",
-                    textTransform: "none",
-                    fontFamily: "Montserrat, Helvetica",
-                    fontWeight: 500,
-                    fontSize: 12,
-                    color: peopleCount === option.value ? "white" : "black",
-                    bgcolor:
-                      peopleCount === option.value ? "primary.main" : "white",
-                    "&.Mui-selected": {
-                      bgcolor: "primary.main",
-                      color: "white",
-                      "&:hover": {
-                        bgcolor: "primary.dark",
-                      },
-                    },
-                  }}
-                >
-                  {option.label}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-          </Box>
-
-          <Box mt={1}>
-            <ToggleButtonGroup
-              value={peopleCount}
-              exclusive
-              onChange={handlePeopleCountChange}
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 1,
-                "& .MuiToggleButtonGroup-grouped": {
-                  border: "1px solid #ececec",
-                  borderRadius: "40px !important",
-                  m: 0,
-                },
-              }}
-            >
-              {peopleCountOptions.slice(3, 6).map((option) => (
-                <ToggleButton
-                  key={option.value}
-                  value={option.value}
-                  sx={{
-                    width: 73,
-                    height: 30,
-                    borderRadius: "40px",
-                    textTransform: "none",
-                    fontFamily: "Montserrat, Helvetica",
-                    fontWeight: 500,
-                    fontSize: 12,
-                    color: peopleCount === option.value ? "white" : "black",
-                    bgcolor:
-                      peopleCount === option.value ? "primary.main" : "white",
-                    "&.Mui-selected": {
-                      bgcolor: "primary.main",
-                      color: "white",
-                      "&:hover": {
-                        bgcolor: "primary.dark",
-                      },
-                    },
-                  }}
-                >
-                  {option.label}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-          </Box>
-
-          <Box mt={1}>
-            <ToggleButtonGroup
-              value={peopleCount}
-              exclusive
-              onChange={handlePeopleCountChange}
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 1,
-                "& .MuiToggleButtonGroup-grouped": {
-                  border: "1px solid #ececec",
-                  borderRadius: "40px !important",
-                  m: 0,
-                },
-              }}
-            >
-              {peopleCountOptions.slice(6, 9).map((option) => (
-                <ToggleButton
-                  key={option.value}
-                  value={option.value}
-                  sx={{
-                    width: 73,
-                    height: 30,
-                    borderRadius: "40px",
-                    textTransform: "none",
-                    fontFamily: "Montserrat, Helvetica",
-                    fontWeight: 500,
-                    fontSize: 12,
-                    color: peopleCount === option.value ? "white" : "black",
-                    bgcolor:
-                      peopleCount === option.value ? "primary.main" : "white",
-                    "&.Mui-selected": {
-                      bgcolor: "primary.main",
-                      color: "white",
-                      "&:hover": {
-                        bgcolor: "primary.dark",
-                      },
-                    },
-                  }}
-                >
-                  {option.label}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-          </Box>
-
-          <Box mt={1}>
-            <ToggleButtonGroup
-              value={peopleCount}
-              exclusive
-              onChange={handlePeopleCountChange}
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 1,
-                "& .MuiToggleButtonGroup-grouped": {
-                  border: "1px solid #ececec",
-                  borderRadius: "40px !important",
-                  m: 0,
-                },
-              }}
-            >
-              {peopleCountOptions.slice(9).map((option) => (
-                <ToggleButton
-                  key={option.value}
-                  value={option.value}
-                  sx={{
-                    minWidth: 73,
-                    height: 30,
-                    borderRadius: "40px",
-                    textTransform: "none",
-                    fontFamily: "Montserrat, Helvetica",
-                    fontWeight: 500,
-                    fontSize: 12,
-                    color: peopleCount === option.value ? "white" : "black",
-                    bgcolor:
-                      peopleCount === option.value ? "primary.main" : "white",
-                    "&.Mui-selected": {
-                      bgcolor: "primary.main",
-                      color: "white",
-                      "&:hover": {
-                        bgcolor: "primary.dark",
-                      },
-                    },
-                  }}
-                >
-                  {option.label}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
+          <Box mt={2} sx={{ 
+            display: 'grid', 
+            gridTemplateColumns: isDesktop ? 'repeat(3, 1fr)' : 'repeat(auto-fill, minmax(80px, 1fr))',
+            gap: 1
+          }}>
+            {peopleCountOptions.map((option) => (
+              <Button
+                key={option.value}
+                variant={peopleCount === option.value ? "contained" : "outlined"}
+                onClick={() => handlePeopleCountChange(option.value)}
+                sx={{
+                  height: 30,
+                  borderRadius: "40px",
+                  textTransform: "none",
+                  fontFamily: "Montserrat, Helvetica",
+                  fontWeight: 500,
+                  fontSize: 12,
+                  minWidth: 0,
+                  p: 0
+                }}
+              >
+                {option.label}
+              </Button>
+            ))}
           </Box>
         </Box>
 
@@ -421,16 +239,8 @@ export const NavigationSection = () => {
 
         {/* Location Section */}
         <Box>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography
-              variant="subtitle2"
-              fontWeight="bold"
-              fontFamily="Montserrat, Helvetica"
-            >
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Typography variant="subtitle2" fontWeight="bold" fontFamily="Montserrat, Helvetica">
               Место
             </Typography>
             <Add fontSize="small" />
@@ -475,47 +285,10 @@ export const NavigationSection = () => {
                         },
                       },
                     }}
-                    checkedIcon={
-                      <Box
-                        sx={{
-                          width: 15,
-                          height: 15,
-                          backgroundColor: "white",
-                          border: "1px solid #d3d3d3",
-                          borderRadius: "50%",
-                          position: "relative",
-                          "&::after": {
-                            content: '""',
-                            position: "absolute",
-                            width: 7,
-                            height: 7,
-                            backgroundColor: "primary.main",
-                            borderRadius: "50%",
-                            top: 3,
-                            left: 3,
-                          },
-                        }}
-                      />
-                    }
-                    icon={
-                      <Box
-                        sx={{
-                          width: 15,
-                          height: 15,
-                          backgroundColor: "white",
-                          border: "1px solid #d3d3d3",
-                          borderRadius: "50%",
-                        }}
-                      />
-                    }
                   />
                 }
                 label={
-                  <Typography
-                    variant="caption"
-                    fontWeight={500}
-                    fontFamily="Montserrat, Helvetica"
-                  >
+                  <Typography variant="caption" fontWeight={500} fontFamily="Montserrat, Helvetica">
                     {option.label}
                   </Typography>
                 }
@@ -536,18 +309,10 @@ export const NavigationSection = () => {
             onClick={() => toggleSection("duration")}
             sx={{ cursor: "pointer" }}
           >
-            <Typography
-              variant="subtitle2"
-              fontWeight="bold"
-              fontFamily="Montserrat, Helvetica"
-            >
+            <Typography variant="subtitle2" fontWeight="bold" fontFamily="Montserrat, Helvetica">
               Длительность
             </Typography>
-            {sectionsCollapsed.duration ? (
-              <ExpandMore fontSize="small" />
-            ) : (
-              <ExpandLess fontSize="small" />
-            )}
+            {sectionsCollapsed.duration ? <ExpandMore fontSize="small" /> : <ExpandLess fontSize="small" />}
           </Box>
         </Box>
 
@@ -562,18 +327,10 @@ export const NavigationSection = () => {
             onClick={() => toggleSection("date")}
             sx={{ cursor: "pointer" }}
           >
-            <Typography
-              variant="subtitle2"
-              fontWeight="bold"
-              fontFamily="Montserrat, Helvetica"
-            >
+            <Typography variant="subtitle2" fontWeight="bold" fontFamily="Montserrat, Helvetica">
               Дата
             </Typography>
-            {sectionsCollapsed.date ? (
-              <ExpandMore fontSize="small" />
-            ) : (
-              <ExpandLess fontSize="small" />
-            )}
+            {sectionsCollapsed.date ? <ExpandMore fontSize="small" /> : <ExpandLess fontSize="small" />}
           </Box>
         </Box>
 
@@ -590,6 +347,7 @@ export const NavigationSection = () => {
             fontFamily: "Montserrat, Helvetica",
             fontWeight: "bold",
             fontSize: 14,
+            mt: 1
           }}
         >
           Показать
@@ -604,11 +362,7 @@ export const NavigationSection = () => {
           onClick={resetFilters}
         >
           <Refresh fontSize="small" sx={{ mr: 1 }} />
-          <Typography
-            variant="caption"
-            fontWeight={500}
-            fontFamily="Montserrat, Helvetica"
-          >
+          <Typography variant="caption" fontWeight={500} fontFamily="Montserrat, Helvetica">
             Сбросить фильтры
           </Typography>
         </Box>

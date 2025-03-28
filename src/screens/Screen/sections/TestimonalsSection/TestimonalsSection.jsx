@@ -1,8 +1,12 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 
 export const TestimonalsSection = () => {
+  const theme = useTheme();
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  const isSm = useMediaQuery(theme.breakpoints.up("sm"));
+
   const excursionTypes = [
     {
       id: 1,
@@ -35,11 +39,21 @@ export const TestimonalsSection = () => {
   ];
 
   return (
-    <Container sx={{ py: 8 }} maxWidth={'xl'}>
+    <Container 
+      sx={{ 
+        py: isMd ? 8 : 4,
+        px: 2 // Consistent padding on all screens
+      }} 
+      maxWidth="xl"
+    >
       <Typography
-        variant="h4"
+        variant={isMd ? "h4" : "h5"}
         component="h2"
-        sx={{mb: 10}}
+        sx={{ 
+          mb: isMd ? 10 : 6,
+          textAlign: "center",
+          px: 0 // No additional horizontal padding
+        }}
         fontWeight="bold"
         color="primary"
         gutterBottom
@@ -47,20 +61,35 @@ export const TestimonalsSection = () => {
         Виды экскурсий
       </Typography>
 
-      <Grid container spacing={5}>
-        {excursionTypes.map((item, index) => (
+      <Grid container spacing={isMd ? 5 : 3}>
+        {excursionTypes.map((item) => (
           <Grid item xs={12} md={6} key={item.id}>
-            <Box sx={{ display: "flex", mb: 2 }}>
-              <Box sx={{ mr: 2 }}>
+            <Box sx={{ 
+              display: "flex",
+              mb: 2,
+              gap: isMd ? 3 : 2,
+              alignItems: "flex-start",
+              px: 0 // No additional horizontal padding
+            }}>
+              <Box sx={{
+                flexShrink: 0,
+                width: isMd ? 75 : 60,
+                height: isMd ? 74 : 60
+              }}>
                 <img
                   src={item.image}
                   alt={`${item.title} icon`}
-                  style={{ width: 75, height: 74, objectFit: "cover" }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    borderRadius: "8px"
+                  }}
                 />
               </Box>
-              <Box>
+              <Box sx={{ flex: 1 }}>
                 <Typography
-                  variant="h6"
+                  variant={isMd ? "h6" : "subtitle1"}
                   component="h3"
                   fontWeight="bold"
                   color="primary"
@@ -68,7 +97,13 @@ export const TestimonalsSection = () => {
                 >
                   {item.title}
                 </Typography>
-                <Typography variant="body2" sx={{width: "90%"}} color="text.primary">
+                <Typography 
+                  variant="body2" 
+                  color="text.primary"
+                  sx={{
+                    fontSize: isMd ? undefined : "0.875rem"
+                  }}
+                >
                   {item.description}
                 </Typography>
               </Box>
@@ -77,8 +112,22 @@ export const TestimonalsSection = () => {
         ))}
       </Grid>
 
-      <Stack alignItems="center" spacing={2} sx={{ mt: 4 }}>
-        <Typography variant="body2" align="center" sx={{ maxWidth: 550 }}>
+      <Stack 
+        alignItems="center" 
+        spacing={2} 
+        sx={{ 
+          mt: isMd ? 4 : 3,
+          px: 0 // No additional horizontal padding
+        }}
+      >
+        <Typography 
+          variant="body2" 
+          align="center" 
+          sx={{ 
+            maxWidth: 550,
+            fontSize: isSm ? undefined : "0.875rem"
+          }}
+        >
           Выбирайте на нашем сайте экскурсию, которая подходит именно вам и
           записывайтесь онлайн без очередей, просто и быстро!
         </Typography>
@@ -91,7 +140,9 @@ export const TestimonalsSection = () => {
             borderRadius: "60px",
             px: 3,
             py: 1,
+            fontSize: isSm ? undefined : "0.875rem"
           }}
+          size={isSm ? "medium" : "small"}
         >
           К экскурсиям
         </Button>

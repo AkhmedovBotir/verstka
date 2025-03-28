@@ -1,9 +1,18 @@
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography, useTheme, useMediaQuery } from "@mui/material";
 import React from "react";
 
 export const GallerySection = () => {
+  const theme = useTheme();
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  const isSm = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
-    <Box sx={{ width: "100%", position: "relative", py: 4 }}>
+    <Box sx={{ 
+      width: "100%", 
+      position: "relative", 
+      py: 4,
+      overflow: "hidden"
+    }}>
       <Grid container spacing={0}>
         <Grid item xs={12} md={8}>
           <Box
@@ -12,7 +21,7 @@ export const GallerySection = () => {
             alt="Landscape view"
             sx={{
               width: "100%",
-              height: "100%",
+              height: isMd ? "749px" : "400px",
               objectFit: "cover",
               maxHeight: 749,
             }}
@@ -22,20 +31,23 @@ export const GallerySection = () => {
           <Paper
             elevation={0}
             sx={{
-              backgroundColor: "#EDEDED", // gray-2 equivalent
+              backgroundColor: "#EDEDED",
               borderRadius: "10px",
-              p: 6,
-              position: 'absolute',
-              right: '300px',
-              top: "150px",
-              width: '542px',
+              p: isMd ? 6 : isSm ? 4 : 3,
+              position: "absolute",
+              right: isMd ? "300px" : "50%",
+              transform: isMd ? "none" : "translateX(50%)",
+              top: isMd ? "150px" : "50%",
+              ...(!isMd && { transform: "translate(50%, -50%)" }),
+              width: isMd ? "542px" : "90%",
+              maxWidth: "542px",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
             }}
           >
             <Typography
-              variant="h4"
+              variant={isMd ? "h4" : "h5"}
               fontWeight="bold"
               color="primary"
               sx={{ mb: 3 }}

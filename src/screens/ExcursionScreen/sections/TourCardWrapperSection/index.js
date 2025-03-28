@@ -1,1 +1,0 @@
-export { TourCardWrapperSection } from "./TourCardWrapperSection";

@@ -11,9 +11,7 @@ import React from "react";
 import { FeaturedToursSection } from "./sections/FeaturedToursSection";
 import { HeaderSection } from "./sections/HeaderSection";
 import { MainSection } from "./sections/MainSection";
-import { NavigationSection } from "./sections/NavigationSection";
-import { TourCardWrapperSection } from "./sections/TourCardWrapperSection";
-import { TourDetailsSection } from "./sections/TourDetailsSection";
+
 import { TourFilterSection } from "./sections/TourFilterSection";
 import ToursMain from "./ToursMain/ToursMain";
 

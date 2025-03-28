@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css';
 import Home from "./pages/Home";
 import Excursion from "./pages/Excursion";
+import ExcursesItem from "./pages/ExcursesItem";
 
 // Define your pages here as a JSON configuration
 const pages = [
@@ -14,6 +15,10 @@ const pages = [
   {
     path: "/excursion",
     element: <Excursion />,
+  },
+  {
+    path: "/excurses-item",
+    element: <ExcursesItem />,
   },
 ];
 
