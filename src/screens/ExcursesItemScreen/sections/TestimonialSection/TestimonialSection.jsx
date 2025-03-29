@@ -1,9 +1,13 @@
 import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
-import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Box, Grid, Paper, Stack, Typography, useTheme, useMediaQuery } from "@mui/material";
 import React from "react";
 
 export const TestimonialSection = () => {
+  const theme = useTheme();
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  const isSm = useMediaQuery(theme.breakpoints.up("sm"));
+
   // Calendar data
   const month = "Ноябрь";
   const year = "2021";
@@ -64,169 +68,202 @@ export const TestimonialSection = () => {
   ];
 
   return (
-    <Box sx={{ position: "relative", width: "100%", height: "877px" }}>
-      <Box sx={{ position: "relative", width: "100%", height: "877px" }}>
-        <Box
-          component="img"
-          src="https://c.animaapp.com/m8se7bge4ci0t5/img/------3.png"
-          alt="Travel landscape"
-          sx={{
-            width: "825px",
-            height: "877px",
-            objectFit: "cover",
-            position: "absolute",
-            top: 0,
-            left: 0,
-          }}
-        />
-
+    <Box sx={{ 
+      width: "100%", 
+      position: "relative", 
+      py: 4,
+      overflow: "hidden"
+    }}>
+      {/* Title for desktop - positioned above calendar on right side */}
+      {isMd && (
         <Typography
           variant="h5"
+          fontWeight="bold"
+          color="primary"
           sx={{
             position: "absolute",
-            top: "151px",
-            right: "323px",
-            fontFamily: "Montserrat, Helvetica",
-            fontWeight: "bold",
-            color: "primary.main",
-            textAlign: "right",
+            top: "150px",
+            right: "calc(250px + 200px)", // 300px is the offset, 280px is half of calendar width
+            transform: "translateX(50%)",
+            zIndex: 1,
+            textAlign: "center",
+            width: "100%",
+            maxWidth: "300px"
           }}
         >
           Календарь путешествий
         </Typography>
+      )}
 
-        <Paper
-          elevation={3}
-          sx={{
-            position: "absolute",
-            top: "270px",
-            right: "0",
-            width: "560px",
-            height: "456px",
-            borderRadius: "10px",
-            bgcolor: "#f5f5f5",
-            p: "30px",
-          }}
-        >
-          {/* Month and Year Navigation */}
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="center"
-            spacing={2}
-            sx={{ p: 2.5, width: "100%" }}
-          >
-            <ArrowBackIos
-              sx={{
-                color: "primary.main",
-                fontSize: "18px",
-                cursor: "pointer",
+      <Grid container spacing={0}>
+        <Grid item xs={12} md={8}>
+          <Box
+            component="img"
+            src="https://c.animaapp.com/m8se7bge4ci0t5/img/------3.png"
+            alt="Travel landscape"
+            sx={{
+              width: "100%",
+              height: isMd ? "877px" : "400px",
+              objectFit: "cover",
+              maxHeight: 877,
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          {/* Title for mobile - shown inside the calendar */}
+          {!isMd && (
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              color="primary"
+              sx={{ 
+                mb: 3,
+                textAlign: "center",
+                width: "100%"
               }}
-            />
+            >
+              Календарь путешествий
+            </Typography>
+          )}
+          
+          <Paper
+            elevation={0}
+            sx={{
+              backgroundColor: "#EDEDED",
+              borderRadius: "10px",
+              p: isMd ? 6 : isSm ? 4 : 3,
+              position: "absolute",
+              right: isMd ? "300px" : "50%",
+              transform: isMd ? "none" : "translateX(50%)",
+              top: isMd ? "270px" : "50%", // Adjusted top position for desktop
+              ...(!isMd && { transform: "translate(50%, -50%)" }),
+              width: isMd ? "560px" : "90%",
+              maxWidth: "560px",
+              height: isMd ? "456px" : "auto",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {/* Month and Year Navigation */}
             <Stack
               direction="row"
               alignItems="center"
               justifyContent="center"
-              spacing={1}
-              sx={{ flex: 1 }}
+              spacing={2}
+              sx={{ p: 2.5, width: "100%" }}
             >
-              <Typography
-                variant="h5"
+              <ArrowBackIos
                 sx={{
-                  fontFamily: "Montserrat, Helvetica",
-                  fontWeight: "bold",
                   color: "primary.main",
-                  textAlign: "center",
+                  fontSize: "18px",
+                  cursor: "pointer",
                 }}
+              />
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                spacing={1}
+                sx={{ flex: 1 }}
               >
-                {month}
-              </Typography>
-              <Typography
-                variant="h5"
-                sx={{
-                  fontFamily: "Montserrat, Helvetica",
-                  fontWeight: "bold",
-                  color: "primary.main",
-                  textAlign: "center",
-                }}
-              >
-                {year}
-              </Typography>
-            </Stack>
-            <ArrowForwardIos
-              sx={{
-                color: "primary.main",
-                fontSize: "18px",
-                cursor: "pointer",
-              }}
-            />
-          </Stack>
-
-          {/* Weekdays Header */}
-          <Grid container sx={{ p: 1, width: "100%" }}>
-            {weekDays.map((day, index) => (
-              <Grid item xs key={index} sx={{ textAlign: "center" }}>
                 <Typography
-                  variant="subtitle1"
+                  variant={isMd ? "h5" : "h6"}
                   sx={{
                     fontFamily: "Montserrat, Helvetica",
                     fontWeight: "bold",
+                    color: "primary.main",
                     textAlign: "center",
                   }}
                 >
-                  {day}
+                  {month}
                 </Typography>
-              </Grid>
-            ))}
-          </Grid>
+                <Typography
+                  variant={isMd ? "h5" : "h6"}
+                  sx={{
+                    fontFamily: "Montserrat, Helvetica",
+                    fontWeight: "bold",
+                    color: "primary.main",
+                    textAlign: "center",
+                  }}
+                >
+                  {year}
+                </Typography>
+              </Stack>
+              <ArrowForwardIos
+                sx={{
+                  color: "primary.main",
+                  fontSize: "18px",
+                  cursor: "pointer",
+                }}
+              />
+            </Stack>
 
-          {/* Calendar Grid */}
-          <Box sx={{ flex: 1, width: "100%" }}>
-            {calendarData.map((week, weekIndex) => (
-              <Grid container key={weekIndex} sx={{ mb: 1.25 }}>
-                {week.map((day, dayIndex) => (
-                  <Grid item xs key={dayIndex}>
-                    <Box
-                      sx={{
-                        height: "34px",
-                        position: "relative",
-                        textAlign: "center",
-                      }}
-                    >
-                      <Typography
-                        variant="body1"
+            {/* Weekdays Header */}
+            <Grid container sx={{ p: 1, width: "100%" }}>
+              {weekDays.map((day, index) => (
+                <Grid item xs key={index} sx={{ textAlign: "center" }}>
+                  <Typography
+                    variant={isMd ? "subtitle1" : "subtitle2"}
+                    sx={{
+                      fontFamily: "Montserrat, Helvetica",
+                      fontWeight: "bold",
+                      textAlign: "center",
+                    }}
+                  >
+                    {day}
+                  </Typography>
+                </Grid>
+              ))}
+            </Grid>
+
+            {/* Calendar Grid */}
+            <Box sx={{ flex: 1, width: "100%" }}>
+              {calendarData.map((week, weekIndex) => (
+                <Grid container key={weekIndex} sx={{ mb: 1.25 }}>
+                  {week.map((day, dayIndex) => (
+                    <Grid item xs key={dayIndex}>
+                      <Box
                         sx={{
-                          fontFamily: "Montserrat, Helvetica",
-                          fontWeight: "medium",
-                          color: day.nextMonth
-                            ? "text.disabled"
-                            : "text.primary",
+                          height: isMd ? "34px" : "28px",
+                          position: "relative",
+                          textAlign: "center",
                         }}
                       >
-                        {day.day}
-                      </Typography>
-                      {day.hours && (
                         <Typography
-                          variant="caption"
+                          variant={isMd ? "body1" : "body2"}
                           sx={{
                             fontFamily: "Montserrat, Helvetica",
                             fontWeight: "medium",
-                            color: "primary.main",
-                            fontSize: "10px",
-                            display: "block",
+                            color: day.nextMonth
+                              ? "text.disabled"
+                              : "text.primary",
                           }}
                         >
-                          {day.hours}
+                          {day.day}
                         </Typography>
-                      )}
-                    </Box>
-                  </Grid>
-                ))}
-              </Grid>
-            ))}
-          </Box>
-        </Paper>
-      </Box>
+                        {day.hours && (
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              fontFamily: "Montserrat, Helvetica",
+                              fontWeight: "medium",
+                              color: "primary.main",
+                              fontSize: isMd ? "10px" : "8px",
+                              display: "block",
+                            }}
+                          >
+                            {day.hours}
+                          </Typography>
+                        )}
+                      </Box>
+                    </Grid>
+                  ))}
+                </Grid>
+              ))}
+            </Box>
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

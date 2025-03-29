@@ -5,6 +5,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import { Box, Container, Grid, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
+import vk from "../../../../assets/vk2.png"; // Adjust the path to your VK icon
 
 export const ContactSection = () => {
   const theme = useTheme();
@@ -33,7 +34,7 @@ export const ContactSection = () => {
     <Box
       key="vk"
       component="img"
-      src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/vk-vkontakte-media-social.png"
+      src={vk}
       alt="VK"
       sx={{ width: 31, height: 20 }}
     />,
@@ -53,7 +54,7 @@ export const ContactSection = () => {
           }}>
             <Box
               component="img"
-              src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/logo-color-1.png"
+              src="https://s3-alpha-sig.figma.com/img/2362/9489/18c64aa97762b2a3a082962b9f5603a2?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=QpSlprcEPEkD0QlQKS2xg6Z-KmCw5eeSFPPqaDE1YAT6oubW9DacmfebDoGrSyFjw0atpCpMxHO8PTw0T3Q40ddicUqOgOQSIHJgiNvrbI~p3W12R-oIbfP5aiVc2fT0dLjeaarwjQN0v9De-Py2YaVgd--Up7YHF1yQ5216SExgZa50joHy3bl8EvsbZ-ijP1VGHbcJXHlw5Qlst2Im7Dx8bcwAvCte3TRC1UlVEJJDqNsI-TWDNGS268ngOVCgv0iRMQfSsrmMI8WSS8ExDMAzNmGl4cv284jI5jbZHgY407iYod~VsEGVcpunwQXGH-2j5SVOehIu6wUXYFjQsw__"
               alt="Logo color"
               sx={{ 
                 height: { xs: 90, sm: 114 }, 

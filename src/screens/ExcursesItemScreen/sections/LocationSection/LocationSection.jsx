@@ -1,6 +1,6 @@
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import { Box, Paper, Stack, Typography } from "@mui/material";
+import { Box, Container, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
 
 export const LocationSection = () => {
@@ -26,26 +26,21 @@ export const LocationSection = () => {
     },
     {
       id: 3,
-      icon: <AccessTimeIcon sx={{ width: 20, height: 20 }} />,
+      icon: <AccessTimeIcon sx={{ width: 30, height: 30 }} />,
       value: "12 часов",
       label: "",
     },
   ];
 
   return (
-    <Box sx={{ width: "100%", py: 5 }}>
-      <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+    <Container sx={{ py: 15 }} maxWidth="xl">
+      <Stack direction={{ xs: "column", md: "row" }} spacing={4} alignItems="center" justifyContent="space-between">
         {/* Tour description section */}
-        <Box sx={{ flex: 1, maxWidth: 386 }}>
-          <Typography
-            variant="h5"
-            fontWeight="bold"
-            color="primary"
-            gutterBottom
-          >
+        <Box sx={{ flex: 1 }}>
+          <Typography variant="h5" fontWeight="bold" color="primary" sx={{py: 3}} gutterBottom>
             {tourDescription.title}
           </Typography>
-          <Typography variant="body2" fontWeight="medium" sx={{ mt: 2 }}>
+          <Typography variant="body2" width={"70%"} fontWeight="medium">
             {tourDescription.text}
           </Typography>
         </Box>
@@ -54,21 +49,28 @@ export const LocationSection = () => {
         <Stack
           direction={{ xs: "column", sm: "row" }}
           spacing={3}
-          sx={{ flex: 1 }}
+          sx={{ flex: 1, minWidth: { sm: "fit-content" } }}
         >
           {tourDetails.map((detail) => (
-            <Box key={detail.id} sx={{ position: "relative", height: 117 }}>
-              {/* Yellow circle */}
+            <Box 
+              key={detail.id} 
+              sx={{ 
+                position: "relative", 
+                width: 160, 
+                height: 117 
+              }}
+            >
+              {/* Yellow circle - positioned behind the card */}
               <Box
                 sx={{
                   width: 57,
                   height: 57,
-                  bgcolor: "warning.main",
+                  bgcolor: "#FFC700",
                   borderRadius: "50%",
                   position: "absolute",
                   top: 0,
                   left: 0,
-                  zIndex: 1,
+                  zIndex: 0,
                 }}
               />
 
@@ -76,17 +78,18 @@ export const LocationSection = () => {
               <Paper
                 elevation={3}
                 sx={{
-                  width: 160,
+                  width: "100%",
                   height: 100,
                   position: "absolute",
                   top: 17,
                   left: 18,
                   borderRadius: 2.5,
-                  bgcolor: "rgba(255, 255, 255, 0.2)",
+                  backgroundColor: "rgba(255, 255, 255, 0.2)",
                   backdropFilter: "blur(10px)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  zIndex: 1,
                 }}
               >
                 <Box sx={{ pl: 2 }}>
@@ -98,11 +101,7 @@ export const LocationSection = () => {
                   </Stack>
 
                   {detail.label && (
-                    <Typography
-                      variant="body2"
-                      fontWeight="medium"
-                      sx={{ mt: 0.5 }}
-                    >
+                    <Typography variant="body2" fontWeight="medium" sx={{ mt: 0.5 }}>
                       {detail.label}
                     </Typography>
                   )}
@@ -112,6 +111,6 @@ export const LocationSection = () => {
           ))}
         </Stack>
       </Stack>
-    </Box>
+    </Container>
   );
 };

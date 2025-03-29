@@ -27,7 +27,7 @@ export const BlogSection = () => {
       price: "618 ₽",
       description:
         'Приглашаем вас на экскурсию \n"Обзорная по Большому Сочи":\nЭкскурсия начнется с подъёма на гору Большой Ахун - это высшая точка (665 метров) на побережьи Сочи. На вершине горы Большой Ахун есть смотровая башня, построенная в 1935-36 годах по проекту архитектора С. И. Воробьева...',
-      image: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-13-3.png",
+      image: "https://s3-alpha-sig.figma.com/img/64c1/67d4/70f74e728e0ecd6b914323b8e0d65413?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=idzR5eXSrRURXmuMd0wmLcW6rniKbnUC044pg2bMfnnLGGRrj6JWfNL6YSv1ZhpFoIGR1NHAGcBgJ1-1FKDRc3PrcA9iaUy5rDEPmk1mIPMG-zPx3gJEh1KH0NSZ5oXX63IGaQq84ZradinYjkjS~VTh441ZBnWbINE5aTWQvSlpHCZHt916JmtspQkAbiT~-TGcYljuu7FjaLa2qgUnCfK2S45s4dcXyTyHf7upalMuAAkOLBhSH32B7glzmPSo1qGFxWgcv0oFQ8~QZvT3kSKy7rygCnqfI3anNVn6q~vCBtQkMOjrLhE5Ejz1qPqKuOOXj3HocdpPj-l35pV8oA__",
     },
     {
       id: 2,
@@ -37,7 +37,7 @@ export const BlogSection = () => {
       price: "1 809 ₽",
       description:
         "Конные прогулки проходят в Лазурной долине. С долины открывается красивый вид на море, горы и лес. На всем пути следования экскурсии вас будут сопровождать опытные инструктора. Катание на лошадях или иппотерапия очень полезна для детей и взрослых...",
-      image: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-13-2.png",
+      image: "https://s3-alpha-sig.figma.com/img/a09e/8be0/7a2d9748f467b217061c7561fe0650af?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=GTKUGB8QAYmTrlI6DSpzKzvgV9e5UUD6z11-rWhmsHDlXXRdeKiiS57RVcmqaNfYDwpsVfZ2EbwODaGqsAPVEt3ddIM4A8E695rJU~rzCsYUQ3yJHsEOWbIruzx2ZH5sVdT8N1F~mO~l88D2hS7bjnp8qk9vwxiaEJyNYZL3vrFNkTds~x1bUCGxlcjIwMssRoneej3MDHNxlUfj-Dfen~13gdOi3InmcpYkpU44JygqlJJKXQSL8n6NoNpeVMI4NHlJpqGGNySSPUemqiw9DDUREJHH0G~qHnNvf79qeXXNjVStweg4aQ3ODzsnTwdFekVWxHlYrqaM6DLds73hXQ__",
     },
     {
       id: 3,
@@ -47,7 +47,7 @@ export const BlogSection = () => {
       price: "3 515 ₽",
       description:
         'Маршрут на Квадроциклах проходит по горной реке Мзымта вдоль белых скал и самшитовый лес к водопаду Глубокий Яр или "Пасть Дракона" (экскурсионное название). \nВысота водопада 41,5 метр - это один из самых высоких водопадов Большого Сочи...',
-      image: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-13-1.png",
+      image: "https://s3-alpha-sig.figma.com/img/d39c/ca95/9915328f80ddbcfe3528ced8957eaea2?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Zttag0zuuBQTx9fH0~0jlNT5RNRF1Eu5lTSAIHksjzcdXJVzYNYMh~jVmU5npqlnCygdbYhX1dhswy-QfTB3WsU5XXqQZgQ7OAvwhOfXv~pSQNC-p33e3BRQJWGqeq8u7M0I47a5UNrbafjxH2ReZAH3IN-UowgFpbUaJaizr7ZHCYpIk5M7IaJyqTlbO2Xeh4axZSJfAXGl~l2AJCmlkstftpBw66brUY2A7o0glBhE5DhiAOa3PB7SIx9z~slcErLvTU9MCiZUzWORqAiHhFvLjKpR8pvKtqDZVtzBrhChA5rtaMJZ7L9S9GmlcX7LHtH0I63ivdwJK7VGU41qfA__",
     },
     {
       id: 4,
@@ -57,7 +57,7 @@ export const BlogSection = () => {
       price: "618 ₽",
       description:
         "Троице - Георгиевский женский монастырь расположен в селе Лесное в живописном месте, в котором гармонично сочетаются красота природы и красота архитектуры сотворенная руками человека. \nЭто удивительное место расположено совсем недалеко от Чёрного моря - всего в 20 километрах",
-      image: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-13.png",
+      image: "https://s3-alpha-sig.figma.com/img/d394/f1fc/bbde3122d0f40e34f0f2ce664b8cccfd?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ieZ8WY~Yuy8vXrDfaXf4Pk-RFagYYyQCiKI2-BXijwPtIpq-nPK5p0KxxNHTNV2Hpqz3XzFM5GeCHG5z9amhEuqzoqjFH3TblrsBOxAu6ucSr2OX8OYD4UN8CZTvygn1Y8jvdRjNcfMDZXFtdFCI7LDH2gVf0cr-aPro3akLjouhc1qGfCRDq-wq4uXdFtsV7d3WdbyRMTbJ72GKrkIWLSa4VETRUsKrHx1hxTx0hkwTqlEjpnV42WqOQzhNufYrukThc8JkT92gUFoFBKFyKPSkUsWSxB1FjQQnrCfrxf7VDbAaN4dEuNkn1oO1eblQ34MrK70Tjy0vDSZNYJokZg__",
     },
     {
       id: 4,
@@ -67,7 +67,7 @@ export const BlogSection = () => {
       price: "618 ₽",
       description:
         "Троице - Георгиевский женский монастырь расположен в селе Лесное в живописном месте, в котором гармонично сочетаются красота природы и красота архитектуры сотворенная руками человека. \nЭто удивительное место расположено совсем недалеко от Чёрного моря - всего в 20 километрах",
-      image: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-13.png",
+      image: "https://s3-alpha-sig.figma.com/img/d394/f1fc/bbde3122d0f40e34f0f2ce664b8cccfd?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ieZ8WY~Yuy8vXrDfaXf4Pk-RFagYYyQCiKI2-BXijwPtIpq-nPK5p0KxxNHTNV2Hpqz3XzFM5GeCHG5z9amhEuqzoqjFH3TblrsBOxAu6ucSr2OX8OYD4UN8CZTvygn1Y8jvdRjNcfMDZXFtdFCI7LDH2gVf0cr-aPro3akLjouhc1qGfCRDq-wq4uXdFtsV7d3WdbyRMTbJ72GKrkIWLSa4VETRUsKrHx1hxTx0hkwTqlEjpnV42WqOQzhNufYrukThc8JkT92gUFoFBKFyKPSkUsWSxB1FjQQnrCfrxf7VDbAaN4dEuNkn1oO1eblQ34MrK70Tjy0vDSZNYJokZg__",
     },
     {
       id: 4,
@@ -77,7 +77,7 @@ export const BlogSection = () => {
       price: "618 ₽",
       description:
         "Троице - Георгиевский женский монастырь расположен в селе Лесное в живописном месте, в котором гармонично сочетаются красота природы и красота архитектуры сотворенная руками человека. \nЭто удивительное место расположено совсем недалеко от Чёрного моря - всего в 20 километрах",
-      image: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-13.png",
+      image: "https://s3-alpha-sig.figma.com/img/d394/f1fc/bbde3122d0f40e34f0f2ce664b8cccfd?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ieZ8WY~Yuy8vXrDfaXf4Pk-RFagYYyQCiKI2-BXijwPtIpq-nPK5p0KxxNHTNV2Hpqz3XzFM5GeCHG5z9amhEuqzoqjFH3TblrsBOxAu6ucSr2OX8OYD4UN8CZTvygn1Y8jvdRjNcfMDZXFtdFCI7LDH2gVf0cr-aPro3akLjouhc1qGfCRDq-wq4uXdFtsV7d3WdbyRMTbJ72GKrkIWLSa4VETRUsKrHx1hxTx0hkwTqlEjpnV42WqOQzhNufYrukThc8JkT92gUFoFBKFyKPSkUsWSxB1FjQQnrCfrxf7VDbAaN4dEuNkn1oO1eblQ34MrK70Tjy0vDSZNYJokZg__",
     },
     {
       id: 4,
@@ -87,7 +87,7 @@ export const BlogSection = () => {
       price: "618 ₽",
       description:
         "Троице - Георгиевский женский монастырь расположен в селе Лесное в живописном месте, в котором гармонично сочетаются красота природы и красота архитектуры сотворенная руками человека. \nЭто удивительное место расположено совсем недалеко от Чёрного моря - всего в 20 километрах",
-      image: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-13.png",
+      image: "https://s3-alpha-sig.figma.com/img/d394/f1fc/bbde3122d0f40e34f0f2ce664b8cccfd?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ieZ8WY~Yuy8vXrDfaXf4Pk-RFagYYyQCiKI2-BXijwPtIpq-nPK5p0KxxNHTNV2Hpqz3XzFM5GeCHG5z9amhEuqzoqjFH3TblrsBOxAu6ucSr2OX8OYD4UN8CZTvygn1Y8jvdRjNcfMDZXFtdFCI7LDH2gVf0cr-aPro3akLjouhc1qGfCRDq-wq4uXdFtsV7d3WdbyRMTbJ72GKrkIWLSa4VETRUsKrHx1hxTx0hkwTqlEjpnV42WqOQzhNufYrukThc8JkT92gUFoFBKFyKPSkUsWSxB1FjQQnrCfrxf7VDbAaN4dEuNkn1oO1eblQ34MrK70Tjy0vDSZNYJokZg__",
     },
   ];
 

@@ -15,9 +15,6 @@ export const Screen = () => {
   return (
     <Box
       sx={{
-        bgcolor: "#ffffff",
-        display: "flex",
-        justifyContent: "center",
         width: "100%",
       }}
     >
@@ -25,7 +22,6 @@ export const Screen = () => {
         maxWidth={false}
         disableGutters
         sx={{
-          bgcolor: "white",
           overflow: "hidden",
           position: "relative",
         }}

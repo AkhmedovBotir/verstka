@@ -17,7 +17,9 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import bgVideo from "../../../../assets/video2.mp4";
-
+import vk from "../../../../assets/vk.png"; // Adjust the path to your VK icon
+import { Instagram } from "@mui/icons-material";
+import logo from "../../../../assets/logo.png"
 export const AboutUsSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -35,11 +37,11 @@ export const AboutUsSection = () => {
   const socialIcons = [
     {
       alt: "VK",
-      src: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/vk-vkontakte-media-social-1.png",
+      src: vk,
     },
     {
       alt: "Group",
-      src: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/group-4.png",
+      component: <Instagram sx={{width: 30, height: 30, color: "#fff"}}/>
     },
     {
       component: <FacebookIcon sx={{ width: 30, height: 30, color: '#fff' }} />,
@@ -52,7 +54,7 @@ export const AboutUsSection = () => {
     {
       id: 1,
       type: "image",
-      src: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-12.png",
+      src: "https://s3-alpha-sig.figma.com/img/bfde/9227/4fddbb3487fd7605b478da9c8a1a5b74?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=pcp97ehSVnSdekYurKlQLkUGncY-pvbUvrgagW7QejKrIx~AbvJrx-lpFwBJBsviEuIFUj5dyEGOdDcJhR-dzPDFUVZPs7Ji6erZQUvoRiw3QUakPnCTeUFpLoXooR7OHmKh0iEANaFuc1qgMUJVl71Ts8DRnbZ4CGsna3eS8ouo~yffP-cKCk7G4w7RibtmZPsxgC7xHGoB5OYmditXKMrqQo-QBDLEwTumtMIWxh7NIdY96~-CmKZ9ibKswldhd4295ypbGr~Vrx1XO77FveZ-z2BNIrNTsWWDo2Q~PG4XRFGOZn2lCTvonaJoFNeXjNpFuN3ERY8taZGa4K11eA__",
       alt: "Travel image 1"
     },
     {
@@ -64,7 +66,7 @@ export const AboutUsSection = () => {
     {
       id: 3,
       type: "video",
-      src: "https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-11.png",
+      src: "https://s3-alpha-sig.figma.com/img/cbf4/5631/2da4a49c5d1c73c4fb12509384c0dedc?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=BFDpeCE0lo1170~uilxMhnx5PHUbh4ME9qizgBqplD3ZfE-MhEnhXm8fUOL4AOgmK-QRkm824ABeTnzf8ShLyTTGhQC0T1Hkkzk7x8nhcildpUYhlxA-ur5~ZuM6VVsLPwrc6JizY6kjycdN~PiLDmCI4SlUMl7rU~sfVDVokXYwwSPzqZNluqqXYnFbT-njblyJ5GdQ12IO4c9ZUs0PaXuTExfcucBcV64f5IYu9JZkM8JfrAJbANW4sC5wV2SlH9aVO2kXLxm7lXdMHGLSb74-WWmkFcF9aCzhfiHNSyrc6y3oKO2VmkN6NtoswVfvSy85-4SWrqQ1ehVUbcWYsg__",
       alt: "Video thumbnail"
     },
     {
@@ -199,7 +201,7 @@ export const AboutUsSection = () => {
       }}>
         <Box
           component="img"
-          src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/----.png"
+          src={logo}
           alt="Logo"
           sx={{
             width: "40px",

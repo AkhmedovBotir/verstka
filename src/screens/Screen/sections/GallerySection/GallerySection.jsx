@@ -17,7 +17,7 @@ export const GallerySection = () => {
         <Grid item xs={12} md={8}>
           <Box
             component="img"
-            src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-4.png"
+            src="https://s3-alpha-sig.figma.com/img/e5fa/6b4a/3c2881475defd3392ffa286dc21488e2?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=VFwri0uUkQW8vypAEqt~IUt2OTFTFV7Apovj0vxo-CDhCbojPCi7vBObpoOK7Ufz5o--b5daNhGMARV3y5gqqyU3-CEtgxx2Sy31YBS~Bw7YsgyA2d0fLnpF5jWdhVPqpOaRqOZIDKeG6mA0bzbSXXAkbC5CZNjr0mNltL1EvzOdhfyWNVuhxDcqZlEO50M--Ef3szi-wIXRN~KtZF8f31sP0SHB5LXLFklPg478P-IaST7VVeU1oN5PPMIVrDLrO91WY7wz-0OAzXNlj-l1R38RBzcSlsEC5PyEREfwYVu9i7F4f3KOKdf34F2fWfH0TyG3VDhD1XqDpMdb4IJKUw__"
             alt="Landscape view"
             sx={{
               width: "100%",

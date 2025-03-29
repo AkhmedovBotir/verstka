@@ -20,8 +20,9 @@ export const NewsletterSection = () => {
         width: "100%",
         height: { xs: "auto", md: "700px" },
         minHeight: { xs: "600px", md: "auto" },
-        backgroundImage: "url(https://c.animaapp.com/m8pgdzd8FQTPbO/img/rectangle-27.png)",
+        backgroundImage: "url(https://s3-alpha-sig.figma.com/img/d7b4/6343/7c59f0eb3d59497e76861bf3a363da36?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ri5beS1Ia~PPVKL8VKIDsnaEhSz2YDW5IsPqmSi6wimKklVHLNJlKT13G6Bkmg-syLF3YYOOEw0Eq3PJ8ElkDqODjAtvbkWop3bxiUUO3fcgGgyPltOC0p12VLEVoqesQWSU~hyeu-wsrsflJ36HcG6w53kFT4UCfxPJPM7mvFw~w1jxCBNgMUdE9uVQW5sIA~UA4YloHaKM4Ni~iE0pnHH31jQCNwGl63DnwbXbAE6QPl9G3fDql-e9glZ9c6W-nX7x4G4P-TU6bCh41qxWXBi5IXJtLc82OlN4E5HscWgz4PcWwJFkF~rJtmapXMUtvU0mcDXiafYpjLtLgQgAIw__)",
         backgroundSize: "cover",
+        backgroundAttachment: "fixed",
         backgroundPosition: "center",
         display: "flex",
         justifyContent: { xs: "center", md: "flex-end" },
@@ -77,7 +78,14 @@ export const NewsletterSection = () => {
 
         <Stack spacing={isSmUp ? 5 : 3}>
           {formFields.map((field) => (
-            <Box key={field.id} sx={{ position: "relative" }}>
+            <Box 
+              key={field.id} 
+              sx={{ 
+                position: "relative",
+                paddingBottom: "8px",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.5)"
+              }}
+            >
               <TextField
                 id={field.id}
                 label={field.label}
@@ -99,23 +107,15 @@ export const NewsletterSection = () => {
                   },
                 }}
                 sx={{
+                  "& .MuiInput-root": {
+                    paddingBottom: 0
+                  },
                   "& .MuiInput-root:before": {
                     borderBottom: "none",
                   },
                   "& .MuiInput-root:after": {
                     borderBottom: "none",
                   },
-                }}
-              />
-              <Box
-                component="img"
-                src="https://c.animaapp.com/m8pgdzd8FQTPbO/img/line-3.svg"
-                alt="Line"
-                sx={{
-                  width: "100%",
-                  maxWidth: "360px",
-                  height: "1px",
-                  marginTop: "0px",
                 }}
               />
             </Box>
